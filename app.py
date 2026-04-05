@@ -30,10 +30,16 @@ Rules:
 - Keep the writing concise and businesslike.
 - Do not use tables.
 - Use only information supported by the notes.
-- If an action is supported by the notes, keep it in Action Items even when some fields are missing.
+- In Meeting Summary, briefly state the real topics, progress, and uncertainty from the notes. Avoid generic filler such as saying the meeting happened or a review was conducted.
+- If an action is supported by the notes and is not blocked, keep it in Action Items even when some fields are missing.
+- For Action Items, use a simple bullet structure like:
+  - Task: ...
+    Owner: ...
+    Deadline: ...
 - Clearly mark missing owners, deadlines, or other missing details instead of dropping the action item.
-- Put unresolved conflicts, uncertainty, speculative items, and details that need confirmation in Needs Human Review.
-- Under Action Items, use short bullet points when there are actions to take.
+- Do not present an item as a committed action if it is blocked by unresolved conflict, missing approval, or disputed ownership.
+- If multiple possible owners are mentioned, do not choose one. Use UNKNOWN only when the action itself is supported but the owner is simply missing; move the item to Needs Human Review when ownership is genuinely unresolved or disputed.
+- Put unresolved conflicts, blocked next steps, uncertainty, speculative items, and details that need confirmation in Needs Human Review.
 """
 
 
