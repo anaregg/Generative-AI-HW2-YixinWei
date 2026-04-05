@@ -31,4 +31,4 @@ This task is valuable because teams often lose time after meetings trying to cle
 This project uses the Gemini API through Google AI Studio. The Python script is designed to run from the command line and use an API key stored in an environment variable.
 
 ## Walkthrough Video
-[Add YouTube link here]
+https://youtu.be/HmvwWbnEhRM
