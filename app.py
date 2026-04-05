@@ -3,6 +3,7 @@
 Run:
     python app.py --list
     python app.py case_1_normal
+    python app.py case_1_normal --tag v2
 """
 
 import argparse
@@ -29,8 +30,9 @@ Rules:
 - Keep the writing concise and businesslike.
 - Do not use tables.
 - Use only information supported by the notes.
-- If details are unclear, say what is missing instead of guessing.
-- Put unresolved conflicts, missing owners, uncertain deadlines, and speculative items in Needs Human Review.
+- If an action is supported by the notes, keep it in Action Items even when some fields are missing.
+- Clearly mark missing owners, deadlines, or other missing details instead of dropping the action item.
+- Put unresolved conflicts, uncertainty, speculative items, and details that need confirmation in Needs Human Review.
 - Under Action Items, use short bullet points when there are actions to take.
 """
 
@@ -78,6 +80,17 @@ def generate_output(client: genai.Client, case: dict) -> str:
     return text.strip()
 
 
+def build_output_path(output_dir: Path, case_id: str, tag: str | None) -> Path:
+    """Build the output file path, optionally including a short tag."""
+    if not tag:
+        filename = f"{case_id}.md"
+    else:
+        # Keep filenames simple and safe for repeated runs.
+        safe_tag = "".join(char if char.isalnum() or char in ("-", "_") else "_" for char in tag)
+        filename = f"{case_id}_{safe_tag}.md"
+    return output_dir / filename
+
+
 def parse_args() -> argparse.Namespace:
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(
@@ -92,6 +105,10 @@ def parse_args() -> argparse.Namespace:
         "--list",
         action="store_true",
         help="List the available case ids and exit.",
+    )
+    parser.add_argument(
+        "--tag",
+        help="Optional tag for the saved file name, for example: outputs/case_1_normal_v2.md",
     )
     return parser.parse_args()
 
@@ -142,7 +159,7 @@ def main() -> int:
 
     # Create the output folder only when we have a successful result to save.
     output_dir.mkdir(parents=True, exist_ok=True)
-    output_path = output_dir / f"{case['id']}.md"
+    output_path = build_output_path(output_dir, case["id"], args.tag)
     output_path.write_text(output_text + "\n", encoding="utf-8")
 
     print(f"Case ID: {case['id']}")
