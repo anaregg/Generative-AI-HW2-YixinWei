@@ -1,0 +1,32 @@
+[
+  {
+    "id": "case_1_normal",
+    "case_type": "normal",
+    "input": "Weekly product sync\n- Sarah: revised pricing slide by Thu\n- Mike check legal wording w/ compliance before Fri\n- design update onboarding mockup for Apr 18 review\n- next check-in Tue 10am",
+    "expected_behavior": "The output should identify the main action items correctly, keep the right owners and deadlines, and avoid treating the regular check-in time as a task unless it is clearly presented as a follow-up action."
+  },
+  {
+    "id": "case_2_sparse",
+    "case_type": "edge",
+    "input": "Ops handoff\n- dashboard issue still open\n- follow up vendor\n- budget not final\n- maybe next week",
+    "expected_behavior": "The output should extract only the limited actions supported by the notes, avoid inventing owners or exact deadlines, and mark unclear details as missing or requiring review."
+  },
+  {
+    "id": "case_3_human_review",
+    "case_type": "human_review",
+    "input": "Leadership call - APAC expansion\n- discussed hiring / legal setup / target Q3 if approved\n- no final decisions\n- CEO wants summary of risks + open questions\n- ownership not assigned yet",
+    "expected_behavior": "The output should avoid presenting speculative plans as confirmed actions, separate discussion points from real next steps, and clearly flag that approvals, ownership, and timing still require human review."
+  },
+  {
+    "id": "case_4_mixed_language",
+    "case_type": "mixed_language",
+    "input": "Marketing standup\n- Ana redo landing page headline, Monday morning if possible\n- Ken说他会跟sales确认客户案例能不能公开\n- final deck cleanup before partner demo\n- maybe remove old pricing screenshot",
+    "expected_behavior": "The output should correctly interpret the mixed-language notes, turn them into clear action items, and preserve uncertainty where timing or scope is still tentative."
+  },
+  {
+    "id": "case_5_conflict",
+    "case_type": "conflict",
+    "input": "Project Phoenix review\n- John: client update goes out Wed\n- later Priya: wait until legal signs off Fri\n- owner for draft maybe John or Emily\n- finance numbers called final, then later 'still subject to revision'",
+    "expected_behavior": "The output should preserve the conflicting information instead of choosing one version without support, produce cautious action items where possible, and clearly flag unresolved owner, timing, and status issues for human review."
+  }
+]
